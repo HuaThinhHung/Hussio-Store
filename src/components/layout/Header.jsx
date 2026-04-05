@@ -6,25 +6,21 @@ import { useCart } from "../../context/CartContext";
 
 const nav = [
   {
-    label: "BST BST TẾT",
-    description: "Áo Polo & Sơ Mi",
-    href: "/product/polo-tet-red",
+    label: "Trang Chủ",
+    href: "/",
     hasMegaMenu: true,
   },
   {
-    label: "Bán chạy",
-    description: "Được nam giới tin chọn",
-    href: "#bestsellers",
+    label: "Sản phẩm",
+    href: "/products",
   },
-  { label: "Combo Tết", description: "Quà tặng phái mạnh", href: "#combo" },
+  { label: "Blog Hussio", href: "/blog" },
   {
-    label: "Phụ kiện",
-    description: "Ví, Thắt lưng, Giày",
-    href: "/products?category=phu-kien",
+    label: "Liên hệ",
+    href: "/contact",
   },
   {
     label: "Giảm giá Tết",
-    description: "Ưu đãi giới hạn",
     href: "#sale",
     accent: true,
   },
@@ -244,7 +240,9 @@ export function Header() {
             className="hidden min-h-11 min-w-11 items-center justify-center rounded-full text-neutral-800 transition hover:bg-neutral-50 lg:inline-flex"
             aria-label="Tài khoản"
           >
-            <IconUser className="h-5 w-5" />
+            <Link to="/login">
+              <IconUser className="h-5 w-5" />
+            </Link>
           </button>
           <button
             type="button"
@@ -371,8 +369,14 @@ export function Header() {
               </div>
             ))}
             <div className="flex flex-col gap-4 pt-2">
-              <Button variant="inverse" className="min-h-12 w-full">
-                Đăng nhập
+              <Button
+                variant="inverse"
+                className="min-h-12 w-full"
+                onClick={() => setMobileOpen(false)}
+              >
+                <Link to="/login" className="w-full text-center">
+                  Đăng nhập
+                </Link>
               </Button>
               <div className="flex items-center justify-between px-1 text-xs text-neutral-500">
                 <a href="#" className="min-h-10 py-2">

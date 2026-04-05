@@ -1,10 +1,10 @@
-import { Outlet } from 'react-router-dom';
-import { Header } from './Header';
-import { Footer } from './Footer';
-import { MysteryDiscountTab } from '../sections/MysteryDiscountTab';
-import { MysteryDiscountModal } from '../sections/MysteryDiscountModal';
-import { FloatingActions } from '../ui/FloatingActions';
-import { useState } from 'react';
+import { Outlet } from "react-router-dom";
+import { Header } from "./Header";
+import { Footer } from "./Footer";
+import { MysteryDiscountTab } from "../sections/MysteryDiscountTab";
+import { MysteryDiscountModal } from "../sections/MysteryDiscountModal";
+import { FloatingActions } from "../ui/FloatingActions";
+import { useState } from "react";
 
 function PublicLayout() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,14 +12,14 @@ function PublicLayout() {
 
   return (
     <div className="flex min-h-dvh flex-col bg-white font-sans text-neutral-900 antialiased">
-      <MysteryDiscountTab 
-        onClick={() => setIsModalOpen(true)} 
+      <MysteryDiscountTab
+        onClick={() => setIsModalOpen(true)}
         isTabVisible={isTabVisible}
         setIsTabVisible={setIsTabVisible}
       />
-      <MysteryDiscountModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
+      <MysteryDiscountModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
       />
       <Header />
       <main

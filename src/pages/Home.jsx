@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { initFlowbite } from "flowbite";
 import { Hero } from "../components/sections/Hero";
+import { FlashSale } from "../components/sections/FlashSale";
+import { ServiceBanner } from "../components/sections/ServiceBanner";
 import { HomeTrustBar } from "../components/sections/HomeTrustBar";
 import { CategoryShowcase } from "../components/sections/CategoryShowcase";
 import { FeaturedCollection } from "../components/sections/FeaturedCollection";
@@ -13,6 +15,8 @@ import { Lookbook } from "../components/sections/Lookbook";
 import { SocialGalleryStrip } from "../components/sections/SocialGalleryStrip";
 import { CustomerReviews } from "../components/sections/CustomerReviews";
 import { NewsletterSignup } from "../components/sections/NewsletterSignup";
+import { InstagramFeed } from "../components/sections/InstagramFeed";
+import { FAQ } from "../components/sections/FAQ";
 
 export function Home() {
   useEffect(() => {
@@ -22,6 +26,8 @@ export function Home() {
   return (
     <div className="overflow-x-hidden bg-white font-sans text-neutral-900 antialiased">
       <Hero />
+      <FlashSale />
+      <ServiceBanner />
       <HomeTrustBar />
       <CategoryShowcase />
       <FeaturedCollection />
@@ -32,7 +38,9 @@ export function Home() {
       <BrandStory />
       <Lookbook />
       <SocialGalleryStrip />
+      <InstagramFeed />
       <CustomerReviews />
+      <FAQ />
       <NewsletterSignup />
     </div>
   );
