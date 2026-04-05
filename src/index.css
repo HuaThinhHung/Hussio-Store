@@ -10,11 +10,33 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+  min-height: 100dvh;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Tránh zoom ô nhập trên Safari iOS khi font < 16px */
+@media (max-width: 640px) {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  textarea,
+  select {
+    font-size: max(16px, 1em);
+  }
+}
+
+/* Giảm độ trễ 300ms trên một số trình duyệt; không chặn double-tap zoom */
+button,
+[role="button"],
+a[href] {
+  touch-action: manipulation;
 }
 
 @utility animate-fade-in-up {

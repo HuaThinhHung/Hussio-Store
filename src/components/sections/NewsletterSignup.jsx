@@ -12,7 +12,7 @@ export function NewsletterSignup() {
   };
 
   return (
-    <section className="bg-neutral-900 py-24 lg:py-32">
+    <section className="bg-neutral-900 py-16 sm:py-20 lg:py-32">
       <div className="mx-auto max-w-[1600px] px-6 lg:px-12">
         <div className="mx-auto max-w-xl text-center">
           {!submitted ? (
@@ -41,7 +41,7 @@ export function NewsletterSignup() {
                 />
                 <button
                   type="submit"
-                  className="shrink-0 rounded-full bg-white px-8 py-3.5 font-sans text-[10px] font-bold uppercase tracking-[0.18em] text-neutral-900 transition-all hover:bg-neutral-200 active:scale-95"
+                  className="min-h-12 shrink-0 rounded-full bg-white px-8 py-3.5 font-sans text-[10px] font-bold uppercase tracking-[0.18em] text-neutral-900 transition-all hover:bg-neutral-200 active:scale-95"
                 >
                   Đăng ký
                 </button>
@@ -74,7 +74,7 @@ export function NewsletterSignup() {
 
         {/* Trust badges */}
         {!submitted && (
-          <div className="mx-auto mt-16 grid max-w-2xl grid-cols-3 gap-6 border-t border-white/10 pt-12">
+          <div className="mx-auto mt-12 grid max-w-2xl grid-cols-1 gap-8 border-t border-white/10 pt-10 sm:mt-16 sm:grid-cols-3 sm:gap-6 sm:pt-12">
             {[
               {
                 icon: (

@@ -35,7 +35,7 @@ const images = [
 
 export function Lookbook() {
   return (
-    <section className="bg-neutral-50 py-24 lg:py-32">
+    <section id="lookbook" className="scroll-mt-24 bg-neutral-50 py-16 sm:py-20 lg:py-32">
       <div className="mx-auto max-w-[1600px] px-6 lg:px-12">
         <div className="mb-14 flex flex-col items-center text-center">
           <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-neutral-400">

@@ -48,7 +48,7 @@ export function Footer() {
                     <li key={l}>
                       <a
                         href="#"
-                        className="font-sans text-sm text-neutral-600 transition hover:text-neutral-900"
+                        className="-mx-1 inline-flex min-h-10 items-center rounded-md px-1 py-1 font-sans text-sm text-neutral-600 transition hover:text-neutral-900"
                       >
                         {l}
                       </a>
@@ -65,7 +65,7 @@ export function Footer() {
                     <li key={l}>
                       <a
                         href="#"
-                        className="font-sans text-sm text-neutral-600 transition hover:text-neutral-900"
+                        className="-mx-1 inline-flex min-h-10 items-center rounded-md px-1 py-1 font-sans text-sm text-neutral-600 transition hover:text-neutral-900"
                       >
                         {l}
                       </a>
@@ -82,7 +82,7 @@ export function Footer() {
                     <li key={l}>
                       <a
                         href="#"
-                        className="font-sans text-sm text-neutral-600 transition hover:text-neutral-900"
+                        className="-mx-1 inline-flex min-h-10 items-center rounded-md px-1 py-1 font-sans text-sm text-neutral-600 transition hover:text-neutral-900"
                       >
                         {l}
                       </a>

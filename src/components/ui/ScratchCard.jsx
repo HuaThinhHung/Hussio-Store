@@ -17,6 +17,16 @@ export function ScratchCard({
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    const preventScrollWhileScratching = (e) => {
+      if (!isFinished) e.preventDefault();
+    };
+    canvas.addEventListener("touchmove", preventScrollWhileScratching, { passive: false });
+    return () => canvas.removeEventListener("touchmove", preventScrollWhileScratching);
+  }, [isFinished]);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 

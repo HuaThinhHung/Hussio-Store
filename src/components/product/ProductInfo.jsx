@@ -187,18 +187,19 @@ export function ProductInfo({
           <span className="text-xs font-bold uppercase tracking-widest text-neutral-900">
             Màu sắc: {selectedColor}
           </span>
-          <div className="mt-3 flex gap-3">
+          <div className="mt-3 flex flex-wrap gap-3">
             {colors.map((color) => (
               <button
                 key={color}
                 type="button"
                 onClick={() => setSelectedColor(color)}
-                className={`h-10 w-10 rounded-full border-2 p-0.5 transition-all ${
+                className={`flex h-11 w-11 items-center justify-center rounded-full border-2 p-0.5 transition-all ${
                   selectedColor === color
                     ? "border-neutral-900 ring-2 ring-neutral-900 ring-offset-2"
                     : "border-transparent hover:border-neutral-300"
                 }`}
                 aria-pressed={selectedColor === color}
+                aria-label={`Màu ${color}`}
               >
                 <div
                   className={`h-full w-full rounded-full border border-neutral-200 shadow-inner ${colorSwatchClass(color)}`}
@@ -241,12 +242,13 @@ export function ProductInfo({
 
       {/* Purchase Actions */}
       <div className="mt-4 space-y-4">
-        <div className="flex gap-4">
+          <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
           <div className="flex items-center rounded-lg border border-neutral-200">
             <button
               type="button"
               onClick={() => setQuantity(Math.max(1, quantity - 1))}
-              className="px-4 py-3 text-neutral-500 hover:text-neutral-900"
+              className="inline-flex min-h-12 min-w-12 items-center justify-center text-neutral-500 hover:text-neutral-900"
+              aria-label="Giảm số lượng"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -260,11 +262,12 @@ export function ProductInfo({
                 <line x1="5" y1="12" x2="19" y2="12"></line>
               </svg>
             </button>
-            <span className="w-10 text-center font-bold">{quantity}</span>
+            <span className="min-w-10 px-2 text-center text-base font-bold tabular-nums">{quantity}</span>
             <button
               type="button"
               onClick={() => setQuantity(quantity + 1)}
-              className="px-4 py-3 text-neutral-500 hover:text-neutral-900"
+              className="inline-flex min-h-12 min-w-12 items-center justify-center text-neutral-500 hover:text-neutral-900"
+              aria-label="Tăng số lượng"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -284,7 +287,7 @@ export function ProductInfo({
             type="button"
             onClick={handleAddToCart}
             disabled={adding}
-            className={`flex-1 rounded-lg px-8 py-4 text-sm font-bold uppercase tracking-widest transition-all active:scale-95 disabled:opacity-60 ${
+            className={`min-h-12 flex-1 rounded-lg px-6 py-3.5 text-sm font-bold uppercase tracking-widest transition-all active:scale-95 disabled:opacity-60 sm:px-8 sm:py-4 ${
               justAdded
                 ? "bg-emerald-600 text-white hover:bg-emerald-700"
                 : "bg-neutral-900 text-white hover:bg-neutral-800"
@@ -301,7 +304,7 @@ export function ProductInfo({
           type="button"
           onClick={handleBuyNow}
           disabled={adding || !onBuyNow}
-          className="w-full rounded-lg bg-red-600 py-4 text-sm font-bold uppercase tracking-widest text-white shadow-lg transition-all hover:bg-red-700 active:scale-95 disabled:opacity-60"
+          className="min-h-12 w-full rounded-lg bg-red-600 py-3.5 text-sm font-bold uppercase tracking-widest text-white shadow-lg transition-all hover:bg-red-700 active:scale-95 disabled:opacity-60 sm:py-4"
         >
           {adding ? "Đang xử lý..." : "Mua ngay"}
         </button>

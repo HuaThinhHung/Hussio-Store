@@ -36,7 +36,7 @@ export function QuanNganSection() {
 
   if (loading) {
     return (
-      <section className="bg-white py-24 lg:py-32">
+      <section className="bg-white py-16 sm:py-20 lg:py-32">
         <div className="mx-auto max-w-[1600px] px-6 lg:px-12">
           <div className="mb-14 flex flex-col items-center text-center">
             <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-neutral-400">
@@ -62,7 +62,7 @@ export function QuanNganSection() {
   if (products.length === 0) return null;
 
   return (
-    <section className="bg-white py-24 lg:py-32">
+    <section className="bg-white py-16 sm:py-20 lg:py-32">
       <div className="mx-auto max-w-[1600px] px-6 lg:px-12">
         <div className="mb-14 flex flex-col items-center text-center">
           <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-neutral-400">

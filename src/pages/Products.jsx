@@ -82,14 +82,14 @@ function Products() {
   }
 
   return (
-    <div className="py-12">
+    <div className="py-8 sm:py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Page Header */}
-        <div className="text-center mb-12">
-          <h1 className="font-serif text-4xl md:text-5xl font-semibold text-gray-900">
+        <div className="mb-8 text-center sm:mb-12">
+          <h1 className="font-serif text-3xl font-semibold text-gray-900 sm:text-4xl md:text-5xl">
             {activeFilterLabel || "Tất cả sản phẩm"}
           </h1>
-          <p className="mt-4 text-gray-500">
+          <p className="mt-3 text-sm text-gray-500 sm:mt-4 sm:text-base">
             {filteredProducts.length} sản phẩm
             {activeFilterLabel && (
               <>
@@ -124,28 +124,28 @@ function Products() {
             </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
             {filteredProducts.map((product) => (
               <Link
                 key={product.id}
                 to={`/product/${product.id}`}
                 className="group block"
               >
-                <div className="relative aspect-3/4 overflow-hidden rounded-xl bg-gray-100 mb-4">
+                <div className="relative mb-2 aspect-3/4 overflow-hidden rounded-lg bg-gray-100 sm:mb-4 sm:rounded-xl">
                   <img
                     src={getProductImage(product)}
                     alt={product.name}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   {product.isFeatured && (
-                    <span className="absolute top-4 left-4 px-3 py-1 bg-black text-white text-xs font-bold uppercase tracking-wider">
+                    <span className="absolute left-2 top-2 bg-black px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white sm:left-4 sm:top-4 sm:px-3 sm:py-1 sm:text-xs">
                       Nổi bật
                     </span>
                   )}
                   {product.discountPrice != null &&
                     product.price > 0 &&
                     product.discountPrice < product.price && (
-                      <span className="absolute top-4 right-4 px-3 py-1 bg-red-600 text-white text-xs font-bold uppercase tracking-wider">
+                      <span className="absolute right-2 top-2 bg-red-600 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white sm:right-4 sm:top-4 sm:px-3 sm:py-1 sm:text-xs">
                         -
                         {Math.round(
                           (1 - product.discountPrice / product.price) * 100,
@@ -155,10 +155,10 @@ function Products() {
                     )}
                 </div>
                 <div className="space-y-1">
-                  <h3 className="font-medium text-gray-900 group-hover:text-gray-600 transition-colors">
+                  <h3 className="line-clamp-2 text-sm font-medium text-gray-900 transition-colors group-hover:text-gray-600 sm:text-base">
                     {product.name}
                   </h3>
-                  <p className="text-xs text-gray-500 uppercase tracking-wider">
+                  <p className="text-[10px] text-gray-500 uppercase tracking-wider sm:text-xs">
                     {product.category}
                   </p>
                   <div className="flex items-center gap-2">

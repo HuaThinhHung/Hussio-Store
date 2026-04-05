@@ -82,7 +82,7 @@ export function Hero() {
   return (
     <section
       className="relative w-full overflow-hidden select-none"
-      style={{ height: "clamp(420px, 88vh, 900px)" }}
+      style={{ minHeight: "clamp(400px, 65vh, 900px)" }}
     >
       {/* Ảnh nền */}
       <div className="absolute inset-0">
@@ -104,7 +104,7 @@ export function Hero() {
         type="button"
         onClick={goPrev}
         aria-label="Slide trước"
-        className="absolute left-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-black/25 text-white/50 backdrop-blur-sm transition-all hover:border-white/20 hover:bg-black/40 hover:text-white/90 active:scale-95 sm:left-5 sm:h-11 sm:w-11 opacity-50 hover:opacity-100"
+        className="absolute left-3 top-1/2 z-20 flex h-11 w-11 min-h-11 min-w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-black/25 text-white/50 opacity-50 backdrop-blur-sm transition-all hover:border-white/20 hover:bg-black/40 hover:text-white/90 hover:opacity-100 active:scale-95 sm:left-5 sm:h-12 sm:w-12"
       >
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <polyline points="15 18 9 12 15 6" />
@@ -114,7 +114,7 @@ export function Hero() {
         type="button"
         onClick={goNext}
         aria-label="Slide sau"
-        className="absolute right-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-black/25 text-white/50 backdrop-blur-sm transition-all hover:border-white/20 hover:bg-black/40 hover:text-white/90 active:scale-95 sm:right-5 sm:h-11 sm:w-11 opacity-50 hover:opacity-100"
+        className="absolute right-3 top-1/2 z-20 flex h-11 w-11 min-h-11 min-w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-black/25 text-white/50 opacity-50 backdrop-blur-sm transition-all hover:border-white/20 hover:bg-black/40 hover:text-white/90 hover:opacity-100 active:scale-95 sm:right-5 sm:h-12 sm:w-12"
       >
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <polyline points="9 18 15 12 9 6" />
@@ -122,7 +122,7 @@ export function Hero() {
       </button>
 
       {/* Chấm pagination — pill tối, giữa dưới */}
-      <div className="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 rounded-full bg-black/45 px-4 py-2.5 backdrop-blur-md sm:bottom-8 sm:gap-2.5 sm:px-5 sm:py-3">
+      <div className="absolute bottom-[max(1.25rem,env(safe-area-inset-bottom,0px))] left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 rounded-full bg-black/45 px-4 py-2.5 backdrop-blur-md sm:bottom-[max(2rem,env(safe-area-inset-bottom,0px))] sm:gap-2.5 sm:px-5 sm:py-3">
         {slides.map((s, i) => (
           <button
             key={s.id}

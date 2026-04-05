@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { orderService } from "../services/orderService";
@@ -16,6 +16,22 @@ function Cart() {
     new Intl.NumberFormat("vi-VN").format(price) + " đ";
 
   const total = items.reduce((sum, item) => sum + Number(item.price || 0) * Number(item.quantity || 0), 0);
+
+  const closeCheckout = useCallback(() => setIsCheckoutModalOpen(false), []);
+
+  useEffect(() => {
+    if (!isCheckoutModalOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e) => {
+      if (e.key === "Escape") closeCheckout();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [isCheckoutModalOpen, closeCheckout]);
 
   const handleCheckout = async () => {
     if (!customerInfo.name || !customerInfo.phone || !customerInfo.address) {
@@ -101,61 +117,66 @@ function Cart() {
   }
 
   return (
-    <div className="min-h-screen py-12">
+    <div className="min-h-screen py-6 sm:py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-12">
-          <h1 className="font-serif text-4xl font-semibold text-gray-900">Giỏ hàng</h1>
-          <p className="mt-2 text-gray-500">{items.length} sản phẩm</p>
+        <div className="mb-8 sm:mb-12">
+          <h1 className="font-serif text-3xl font-semibold text-gray-900 sm:text-4xl">Giỏ hàng</h1>
+          <p className="mt-2 text-sm text-gray-500 sm:text-base">{items.length} sản phẩm</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-12">
           {/* Items */}
           <div className="lg:col-span-2">
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               {items.map((item) => (
                 <div
                   key={item.id}
-                  className="flex gap-6 p-6 bg-white rounded-2xl border border-gray-100 shadow-sm"
+                  className="flex gap-4 rounded-2xl border border-gray-100 bg-white p-4 shadow-sm sm:gap-6 sm:p-6"
                 >
                   {/* Image */}
-                  <div className="w-32 h-32 flex-shrink-0 rounded-xl overflow-hidden bg-gray-100">
+                  <Link
+                    to={`/product/${item.productId}`}
+                    className="h-24 w-24 shrink-0 overflow-hidden rounded-xl bg-gray-100 sm:h-32 sm:w-32"
+                  >
                     <img
                       src={item.image || "https://via.placeholder.com/150"}
-                      alt={item.name}
-                      className="w-full h-full object-cover"
+                      alt=""
+                      className="h-full w-full object-cover"
                       onError={(e) => { e.target.src = "https://via.placeholder.com/150?text=No+Image"; }}
                     />
-                  </div>
+                  </Link>
 
                   {/* Info */}
-                  <div className="flex-1 flex flex-col">
-                    <div className="flex justify-between">
-                      <div>
+                  <div className="flex min-w-0 flex-1 flex-col">
+                    <div className="flex gap-2">
+                      <div className="min-w-0 flex-1">
                         <Link
                           to={`/product/${item.productId}`}
-                          className="font-medium text-gray-900 hover:text-gray-600 transition-colors"
+                          className="line-clamp-2 font-medium text-gray-900 transition-colors hover:text-gray-600"
                         >
                           {item.name}
                         </Link>
-                        {item.color && <p className="text-sm text-gray-500 mt-1">Màu: {item.color}</p>}
+                        {item.color && <p className="mt-1 text-sm text-gray-500">Màu: {item.color}</p>}
                         {item.size && <p className="text-sm text-gray-500">Size: {item.size}</p>}
                       </div>
                       <button
+                        type="button"
                         onClick={() => removeFromCart(item)}
-                        className="text-gray-400 hover:text-red-500 transition-colors"
-                        title="Xóa"
+                        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-gray-400 transition-colors hover:bg-gray-50 hover:text-red-500"
+                        aria-label="Xóa khỏi giỏ"
                       >
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
                         </svg>
                       </button>
                     </div>
 
-                    <div className="mt-auto flex items-end justify-between pt-4">
+                    <div className="mt-auto flex flex-col gap-3 pt-4 sm:flex-row sm:items-end sm:justify-between">
                       {/* Quantity */}
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-2 sm:gap-3">
                         <button
+                          type="button"
                           onClick={() => {
                             if (item.quantity <= 1) {
                               removeFromCart(item);
@@ -163,21 +184,24 @@ function Cart() {
                               updateQuantity(item, item.quantity - 1);
                             }
                           }}
-                          className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-100 transition-colors"
+                          className="flex h-11 w-11 items-center justify-center rounded-full border border-gray-200 transition-colors hover:bg-gray-100"
+                          aria-label="Giảm số lượng"
                         >
-                          <span className="text-lg">−</span>
+                          <span className="text-lg leading-none">−</span>
                         </button>
-                        <span className="w-8 text-center font-medium">{item.quantity}</span>
+                        <span className="min-w-8 text-center font-medium">{item.quantity}</span>
                         <button
+                          type="button"
                           onClick={() => updateQuantity(item, item.quantity + 1)}
-                          className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-100 transition-colors"
+                          className="flex h-11 w-11 items-center justify-center rounded-full border border-gray-200 transition-colors hover:bg-gray-100"
+                          aria-label="Tăng số lượng"
                         >
-                          <span className="text-lg">+</span>
+                          <span className="text-lg leading-none">+</span>
                         </button>
                       </div>
 
                       {/* Price */}
-                      <p className="font-semibold text-gray-900">
+                      <p className="font-semibold text-gray-900 sm:text-right">
                         {formatPrice(Number(item.price) * Number(item.quantity))}
                       </p>
                     </div>
@@ -189,7 +213,7 @@ function Cart() {
 
           {/* Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sticky top-32">
+            <div className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm sm:p-6 lg:sticky lg:top-28">
               <h3 className="font-semibold text-lg text-gray-900 mb-6">Tóm tắt đơn hàng</h3>
 
               <div className="space-y-4 pb-6 border-b border-gray-100">
@@ -209,8 +233,9 @@ function Cart() {
               </div>
 
               <button
+                type="button"
                 onClick={() => setIsCheckoutModalOpen(true)}
-                className="w-full py-4 bg-black text-white font-medium rounded-xl hover:bg-gray-800 transition-colors"
+                className="min-h-12 w-full rounded-xl bg-black py-3.5 font-medium text-white transition-colors hover:bg-gray-800 sm:py-4"
               >
                 Thanh toán
               </button>
@@ -228,56 +253,85 @@ function Cart() {
 
       {/* Checkout Modal */}
       {isCheckoutModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-black/50" onClick={() => setIsCheckoutModalOpen(false)} />
-          <div className="relative bg-white rounded-2xl w-full max-w-lg p-8 shadow-2xl">
+        <div
+          className="fixed inset-0 z-100 flex items-end justify-center p-0 sm:items-center sm:p-[max(1rem,env(safe-area-inset-top,0px))] sm:pb-[max(1rem,env(safe-area-inset-bottom,0px))] sm:pl-[max(1rem,env(safe-area-inset-left,0px))] sm:pr-[max(1rem,env(safe-area-inset-right,0px))]"
+          role="presentation"
+        >
+          <div
+            className="absolute inset-0 bg-black/50"
+            onClick={closeCheckout}
+            aria-hidden
+          />
+          <div
+            className="relative max-h-[min(92dvh,calc(100dvh-env(safe-area-inset-top)-env(safe-area-inset-bottom)))] w-full max-w-lg overflow-y-auto overscroll-contain rounded-t-2xl bg-white p-5 shadow-2xl sm:rounded-2xl sm:p-8"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="checkout-modal-title"
+          >
             <button
-              onClick={() => setIsCheckoutModalOpen(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+              type="button"
+              onClick={closeCheckout}
+              className="absolute right-[max(0.75rem,env(safe-area-inset-right,0px))] top-[max(0.75rem,env(safe-area-inset-top,0px))] flex h-11 w-11 items-center justify-center rounded-full text-gray-400 hover:bg-gray-100 hover:text-gray-700"
+              aria-label="Đóng"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
 
-            <h3 className="font-serif text-2xl font-semibold text-gray-900 mb-6">Thông tin giao hàng</h3>
+            <h3 id="checkout-modal-title" className="font-serif pr-12 text-xl font-semibold text-gray-900 sm:text-2xl">
+              Thông tin giao hàng
+            </h3>
 
-            <div className="space-y-4">
+            <div className="mt-6 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Họ và tên</label>
+                <label htmlFor="checkout-name" className="mb-2 block text-sm font-medium text-gray-700">
+                  Họ và tên
+                </label>
                 <input
+                  id="checkout-name"
                   type="text"
                   value={customerInfo.name}
                   onChange={(e) => setCustomerInfo({ ...customerInfo, name: e.target.value })}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-black focus:border-transparent outline-none"
+                  autoComplete="name"
+                  className="w-full rounded-lg border border-gray-200 px-4 py-3 outline-none focus:border-transparent focus:ring-2 focus:ring-black"
                   placeholder="Nhập họ và tên"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Số điện thoại</label>
+                <label htmlFor="checkout-phone" className="mb-2 block text-sm font-medium text-gray-700">
+                  Số điện thoại
+                </label>
                 <input
+                  id="checkout-phone"
                   type="tel"
                   value={customerInfo.phone}
                   onChange={(e) => setCustomerInfo({ ...customerInfo, phone: e.target.value })}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-black focus:border-transparent outline-none"
+                  autoComplete="tel"
+                  inputMode="tel"
+                  className="w-full rounded-lg border border-gray-200 px-4 py-3 outline-none focus:border-transparent focus:ring-2 focus:ring-black"
                   placeholder="Nhập số điện thoại"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Địa chỉ giao hàng</label>
+                <label htmlFor="checkout-address" className="mb-2 block text-sm font-medium text-gray-700">
+                  Địa chỉ giao hàng
+                </label>
                 <textarea
+                  id="checkout-address"
                   value={customerInfo.address}
                   onChange={(e) => setCustomerInfo({ ...customerInfo, address: e.target.value })}
                   rows={3}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-black focus:border-transparent outline-none resize-none"
+                  autoComplete="street-address"
+                  className="w-full resize-none rounded-lg border border-gray-200 px-4 py-3 outline-none focus:border-transparent focus:ring-2 focus:ring-black"
                   placeholder="Nhập địa chỉ giao hàng"
                 />
               </div>
             </div>
 
-            <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+            <div className="mt-6 rounded-lg bg-gray-50 p-4">
               <div className="flex justify-between font-semibold">
                 <span>Tổng cộng</span>
                 <span>{formatPrice(total)}</span>
@@ -285,13 +339,14 @@ function Cart() {
             </div>
 
             <button
+              type="button"
               onClick={handleCheckout}
               disabled={isSubmitting}
-              className="w-full mt-6 py-4 bg-black text-white font-medium rounded-xl hover:bg-gray-800 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+              className="mt-6 flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-black py-3.5 font-medium text-white transition-colors hover:bg-gray-800 disabled:opacity-50 sm:py-4"
             >
               {isSubmitting ? (
                 <>
-                  <svg className="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
+                  <svg className="h-5 w-5 animate-spin" fill="none" viewBox="0 0 24 24">
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                   </svg>

@@ -17,7 +17,7 @@ export function QuanTayPromoBanner() {
         <div className="absolute inset-0 bg-linear-to-t from-black/65 via-black/25 to-black/10" />
 
         {sideTabOpen && (
-          <div className="absolute left-0 top-1/2 z-20 flex -translate-y-1/2 flex-col items-center border-y border-r border-white/20 bg-white shadow-lg">
+          <div className="absolute left-0 top-1/2 z-20 hidden -translate-y-1/2 flex-col items-center border-y border-r border-white/20 bg-white shadow-lg sm:flex">
             <button
               type="button"
               onClick={() => setSideTabOpen(false)}
@@ -36,7 +36,7 @@ export function QuanTayPromoBanner() {
         )}
 
         <div className="absolute inset-0 flex items-end">
-          <div className="w-full px-6 pb-10 pt-24 sm:px-8 sm:pb-12 lg:px-12 lg:pb-14 lg:pl-16 xl:pb-16">
+          <div className="w-full px-4 pb-[max(2.5rem,env(safe-area-inset-bottom,0px))] pt-20 sm:px-8 sm:pb-12 sm:pt-24 lg:px-12 lg:pb-14 lg:pl-16 xl:pb-16">
             <div className="mx-auto max-w-[1600px]">
               <div className="max-w-lg">
                 <h2 className="font-sans text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">

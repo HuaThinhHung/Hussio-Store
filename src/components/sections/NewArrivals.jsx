@@ -36,7 +36,7 @@ export function NewArrivals() {
 
   if (loading) {
     return (
-      <section className="bg-neutral-50 py-24 lg:py-32">
+      <section className="bg-neutral-50 py-16 sm:py-20 lg:py-32">
         <div className="mx-auto max-w-[1600px] px-6 lg:px-12">
           <div className="mb-14 flex flex-col items-center text-center">
             <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-neutral-400">
@@ -61,7 +61,7 @@ export function NewArrivals() {
 
   if (products.length === 0) {
     return (
-      <section className="bg-neutral-50 py-24 lg:py-32">
+      <section className="bg-neutral-50 py-16 sm:py-20 lg:py-32">
         <div className="mx-auto max-w-[1600px] px-6 lg:px-12">
           <div className="mb-14 flex flex-col items-center text-center">
             <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-neutral-400">
@@ -88,7 +88,7 @@ export function NewArrivals() {
   }
 
   return (
-    <section className="bg-neutral-50 py-24 lg:py-32">
+    <section className="bg-neutral-50 py-16 sm:py-20 lg:py-32">
       <div className="mx-auto max-w-[1600px] px-6 lg:px-12">
         <div className="mb-14 flex flex-col items-center text-center">
           <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-neutral-400">

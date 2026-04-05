@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const reviews = [
   {
@@ -64,22 +64,20 @@ function StarRating({ count }) {
 }
 
 export function CustomerReviews() {
-  const [activeIndex, setActiveIndex] = useState(0);
-
   return (
-    <section className="bg-white py-24 lg:py-32">
+    <section id="customer-reviews" className="scroll-mt-24 bg-white py-16 sm:py-20 lg:py-32">
       <div className="mx-auto max-w-[1600px] px-6 lg:px-12">
-        <div className="mb-14 flex flex-col items-center text-center">
+        <div className="mb-10 flex flex-col items-center text-center sm:mb-14">
           <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-neutral-400">
             Đánh giá khách hàng
           </span>
-          <h2 className="mt-4 font-serif text-4xl font-light text-neutral-900 md:text-5xl lg:text-6xl">
+          <h2 className="mt-3 font-serif text-3xl font-light text-neutral-900 sm:mt-4 sm:text-4xl md:text-5xl lg:text-6xl">
             Hơn 5.000+ khách hàng tin chọn
           </h2>
         </div>
 
         {/* Desktop: 4-column grid */}
-        <div className="hidden grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="hidden gap-6 lg:grid lg:grid-cols-4">
           {reviews.map((review) => (
             <div
               key={review.id}
@@ -111,16 +109,15 @@ export function CustomerReviews() {
           ))}
         </div>
 
-        {/* Mobile: scrollable single column */}
-        <div className="flex gap-4 overflow-x-auto pb-4 sm:hidden" style={{ scrollbarWidth: "none" }}>
-          {reviews.map((review, i) => (
+        {/* Mobile / tablet: horizontal scroll */}
+        <div
+          className="scrollbar-hide -mx-1 flex snap-x snap-mandatory gap-4 overflow-x-auto px-1 pb-4 sm:mx-0 sm:px-0 lg:hidden"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
+          {reviews.map((review) => (
             <div
               key={review.id}
-              className={`min-w-[280px] shrink-0 rounded-2xl border p-5 transition-all ${
-                i === activeIndex
-                  ? "border-neutral-300 bg-neutral-50 shadow-md"
-                  : "border-neutral-100 bg-neutral-50/50"
-              }`}
+              className="min-w-[min(88vw,320px)] shrink-0 snap-start rounded-2xl border border-neutral-100 bg-neutral-50/50 p-5 shadow-sm"
             >
               <StarRating count={review.rating} />
               <h4 className="mt-3 font-sans text-xs font-bold text-neutral-900">{review.title}</h4>
@@ -140,13 +137,13 @@ export function CustomerReviews() {
           ))}
         </div>
 
-        <div className="mt-10 flex justify-center">
-          <a
-            href="#"
-            className="rounded-full border border-neutral-200 px-10 py-3.5 text-[10px] font-bold uppercase tracking-[0.18em] text-neutral-600 transition-all hover:border-neutral-900 hover:text-neutral-900"
+        <div className="mt-8 flex justify-center sm:mt-10">
+          <Link
+            to="/products"
+            className="rounded-full border border-neutral-200 px-8 py-3 text-[10px] font-bold uppercase tracking-[0.18em] text-neutral-600 transition-all hover:border-neutral-900 hover:text-neutral-900 sm:px-10 sm:py-3.5"
           >
-            Xem tất cả đánh giá
-          </a>
+            Xem sản phẩm
+          </Link>
         </div>
       </div>
     </section>

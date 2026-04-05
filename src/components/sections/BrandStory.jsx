@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export function BrandStory() {
   return (
-    <section className="bg-white py-24 lg:py-36">
+    <section className="bg-white py-16 sm:py-20 lg:py-36">
       <div className="mx-auto max-w-[1600px] px-6 lg:px-12">
         <div className="flex flex-col items-center gap-16 lg:flex-row lg:gap-24">
           {/* Hình ảnh */}

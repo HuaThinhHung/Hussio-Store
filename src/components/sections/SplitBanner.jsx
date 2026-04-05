@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export function SplitBanner() {
   return (
-    <section className="bg-white py-20 lg:py-28">
+    <section className="bg-white py-14 sm:py-16 lg:py-28">
       <div className="mx-auto max-w-[1600px] px-6 lg:px-12">
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-6">
           {/* Banner trái - BST Tết */}
