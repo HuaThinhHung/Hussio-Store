@@ -80,23 +80,20 @@ export function Hero() {
   }, [activeId, total]);
 
   return (
-    <section
-      className="relative w-full overflow-hidden select-none"
-      style={{ minHeight: "clamp(400px, 65vh, 900px)" }}
-    >
-      {/* Ảnh nền */}
-      <div className="absolute inset-0">
+    <section className="relative w-full min-h-[min(72vh,560px)] overflow-hidden select-none sm:min-h-[clamp(400px,65vh,900px)]">
+      {/* Mobile: object-contain + nền tối để thấy trọn ảnh; sm+: object-cover như desktop */}
+      <div className="absolute inset-0 bg-neutral-950">
         {slides.map((s) =>
           s.id === activeId ? (
             <img
               key={s.id}
               src={s.image}
               alt={s.headline}
-              className="absolute inset-0 h-full w-full object-cover transition-opacity duration-500"
+              className="h-full w-full object-contain object-center transition-opacity duration-500 sm:object-cover sm:object-center"
             />
           ) : null,
         )}
-        <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/25 to-black/10" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-black/15 sm:from-black/75 sm:via-black/30 sm:to-black/20" />
       </div>
 
       {/* Nút lướt hai bên — mờ, hover rõ hơn */}

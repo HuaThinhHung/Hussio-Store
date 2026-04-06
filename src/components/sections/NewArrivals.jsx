@@ -29,10 +29,15 @@ export function NewArrivals() {
   };
 
   const formatPrice = (p) =>
-    new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(p);
+    new Intl.NumberFormat("vi-VN", {
+      style: "currency",
+      currency: "VND",
+    }).format(p);
 
   const getProductImage = (product) =>
-    product.image || product.images?.[0] || "https://via.placeholder.com/400x600";
+    product.image ||
+    product.images?.[0] ||
+    "https://via.placeholder.com/400x600";
 
   if (loading) {
     return (
@@ -71,7 +76,8 @@ export function NewArrivals() {
               Sản phẩm nổi bật
             </h2>
             <p className="mt-5 max-w-lg text-sm text-neutral-500">
-              Chưa có sản phẩm quần tây trong kho. Khám phá toàn bộ danh mục tại trang sản phẩm.
+              Chưa có sản phẩm quần tây trong kho. Khám phá toàn bộ danh mục tại
+              trang sản phẩm.
             </p>
           </div>
           <div className="flex justify-center">
@@ -98,13 +104,18 @@ export function NewArrivals() {
             Sản phẩm nổi bật
           </h2>
           <p className="mt-5 max-w-lg text-sm text-neutral-500">
-            Form chuẩn, chất liệu bền đẹp — lựa chọn tin cậy cho phong cách công sở và đời thường.
+            Form chuẩn, chất liệu bền đẹp — lựa chọn tin cậy cho phong cách công
+            sở và đời thường.
           </p>
         </div>
 
         <div className="grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
           {products.map((product) => (
-            <Link key={product.id} to={`/product/${product.id}`} className="group/product">
+            <Link
+              key={product.id}
+              to={`/product/${product.id}`}
+              className="group/product"
+            >
               <div className="relative aspect-3/4 w-full overflow-hidden rounded-2xl bg-neutral-100 transition-all duration-500 group-hover/product:shadow-2xl">
                 <img
                   src={getProductImage(product)}
@@ -133,11 +144,12 @@ export function NewArrivals() {
                   <p className="text-sm font-bold text-neutral-900">
                     {formatPrice(product.discountPrice || product.price)}
                   </p>
-                  {product.discountPrice && product.price > product.discountPrice && (
-                    <p className="text-xs text-neutral-400 line-through">
-                      {formatPrice(product.price)}
-                    </p>
-                  )}
+                  {product.discountPrice &&
+                    product.price > product.discountPrice && (
+                      <p className="text-xs text-neutral-400 line-through">
+                        {formatPrice(product.price)}
+                      </p>
+                    )}
                 </div>
               </div>
             </Link>

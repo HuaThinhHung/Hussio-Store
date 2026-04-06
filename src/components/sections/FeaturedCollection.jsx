@@ -24,14 +24,22 @@ export function FeaturedCollection() {
   };
 
   const formatPrice = (p) =>
-    new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(p);
+    new Intl.NumberFormat("vi-VN", {
+      style: "currency",
+      currency: "VND",
+    }).format(p);
 
   const getProductImage = (product) =>
-    product.image || product.images?.[0] || "https://via.placeholder.com/400x600";
+    product.image ||
+    product.images?.[0] ||
+    "https://via.placeholder.com/400x600";
 
   if (loading) {
     return (
-      <section id="bestsellers" className="scroll-mt-28 bg-neutral-50 py-16 sm:py-20 lg:py-32">
+      <section
+        id="bestsellers"
+        className="scroll-mt-28 bg-neutral-50 py-16 sm:py-20 lg:py-32"
+      >
         <div className="mx-auto max-w-[1600px] px-6 lg:px-12">
           <div className="mb-14 flex flex-col items-center text-center">
             <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-neutral-400">
@@ -57,7 +65,10 @@ export function FeaturedCollection() {
   if (products.length === 0) return null;
 
   return (
-    <section id="bestsellers" className="scroll-mt-28 bg-neutral-50 py-16 sm:py-20 lg:py-32">
+    <section
+      id="bestsellers"
+      className="scroll-mt-28 bg-neutral-50 py-16 sm:py-20 lg:py-32"
+    >
       <div className="mx-auto max-w-[1600px] px-6 lg:px-12">
         <div className="mb-14 flex flex-col items-center text-center">
           <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-neutral-400">
@@ -107,11 +118,12 @@ export function FeaturedCollection() {
                   <p className="text-sm font-bold text-neutral-900">
                     {formatPrice(product.discountPrice || product.price)}
                   </p>
-                  {product.discountPrice && product.price > product.discountPrice && (
-                    <p className="text-xs text-neutral-400 line-through">
-                      {formatPrice(product.price)}
-                    </p>
-                  )}
+                  {product.discountPrice &&
+                    product.price > product.discountPrice && (
+                      <p className="text-xs text-neutral-400 line-through">
+                        {formatPrice(product.price)}
+                      </p>
+                    )}
                 </div>
               </div>
             </Link>

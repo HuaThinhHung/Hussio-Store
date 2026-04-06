@@ -15,7 +15,6 @@ import { Lookbook } from "../components/sections/Lookbook";
 import { SocialGalleryStrip } from "../components/sections/SocialGalleryStrip";
 import { CustomerReviews } from "../components/sections/CustomerReviews";
 import { NewsletterSignup } from "../components/sections/NewsletterSignup";
-import { InstagramFeed } from "../components/sections/InstagramFeed";
 import { FAQ } from "../components/sections/FAQ";
 
 export function Home() {
@@ -38,7 +37,6 @@ export function Home() {
       <BrandStory />
       <Lookbook />
       <SocialGalleryStrip />
-      <InstagramFeed />
       <CustomerReviews />
       <FAQ />
       <NewsletterSignup />
